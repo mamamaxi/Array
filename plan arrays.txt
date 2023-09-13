@@ -1,44 +1,36 @@
-virtual ArrayAbs - abstrait
- size()
- empty()
- operator[]
- at()
- front()
- back()
- fill()
- swap()
- fusion()
- subset()
- begin()
- end()
- cbegin()
- cend()
-
 class Array : ArrayAbs
+ Array() void -> array
+
+ Array() int -> array[int]
+
  size(tab) ret : int
 
- empty(tab) ret : bool
+ empty() tab -> bool
 
- operator[]
+ operator[] int -> pointer
+ ex : tab1[12] -> ptner vers 12e cellule
 
- at()
+ .at() int -> pointer
 
- front(tab) ret : var
+ at verify donc impossible de crash
+ operator ne verify pas -> peut crash mais plus rapide (mieux pour boucle qui pass a travers tableau)
 
- back(tab) ret : var
+ front() tab -> var
 
- fill(val,tab) ret : void
+ back() tab -> var
 
- swap(tab, tab) ret : void
+ fill() val,tab -> void
 
- fusion(tab, tab) ret : tab
+ swap() tab, tab -> void
 
- subset(tab, subtab, debut, nbr) ret : void
+ fusion() tab, tab -> tab
 
- begin() ret : iterateur(0)
+ subset() tab, subtab, debut, nbr -> subtab
 
- end(tab) ret : iterateur
+ begin() void -> iterateur(0)
 
- cbegin() ret : const iterateur
+ end() tab -> iterateur
 
- cend(tab) ret : const iterateur
+ cbegin() void -> const iterateur
+
+ cend() tab -> const iterateur
