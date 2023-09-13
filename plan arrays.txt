@@ -1,0 +1,44 @@
+virtual ArrayAbs - abstrait
+ size()
+ empty()
+ operator[]
+ at()
+ front()
+ back()
+ fill()
+ swap()
+ fusion()
+ subset()
+ begin()
+ end()
+ cbegin()
+ cend()
+
+class Array : ArrayAbs
+ size(tab) ret : int
+
+ empty(tab) ret : bool
+
+ operator[]
+
+ at()
+
+ front(tab) ret : var
+
+ back(tab) ret : var
+
+ fill(val,tab) ret : void
+
+ swap(tab, tab) ret : void
+
+ fusion(tab, tab) ret : tab
+
+ subset(tab, subtab, debut, nbr) ret : void
+
+ begin() ret : iterateur(0)
+
+ end(tab) ret : iterateur
+
+ cbegin() ret : const iterateur
+
+ cend(tab) ret : const iterateur
