@@ -13,7 +13,7 @@ namespace array {
         void fill(volatile value, array tab);   //met la valeur choisi dans chaque cellules du tableau
         void swap(array tab1, array tab2);      //échange les valeurs des deux tableaux
         array fusion(array tab1, array tab2);   //fusionne 2 tableaux
-        array subset(array entry, array return,int start, int length);   //crée un nouveau tableau avec les valeurs entre start et start + length et le met dans le tableau return
+        array subset(array entry, array retour,int start, int length);   //crée un nouveau tableau avec les valeurs entre start et start + length et le met dans le tableau retour
         int begin();                    //retourne un iterateur au début du tableau
         int cbegin();                   //retourne un iterateur constant au début du tableau
         int end(array tab);             //retourne un iterateur a la fin du tableau
@@ -39,11 +39,19 @@ namespace array {
     Array::front(array tab){
         return 1;
     }
-        Array::back(array tab){
+    Array::back(array tab){
         return 1;
     }
-    Array::fill(){
+    Array::swap(array tab1, array tab2){
 
+    }
+    Array::fusion(array tab1, array tab2){}
+    Array::subset(array entry, array retour, int start, int length){}
+    Array::fill(volatile value, array tab){
+        /*for (int i = 0; i < tab.length; i++)
+        {
+            tab[i] = value
+        }*/
     }
     Array::begin(){
         return 0;
