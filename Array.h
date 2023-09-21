@@ -8,7 +8,6 @@ template <typename T, size_t size> class Array {
             size = 0
         };
         Array::Array(typename Type, int howBigIsThisArray){ // avec initialisation
-            size = howBigIsThisArray;
             Arr = Type[size]
         }
 
