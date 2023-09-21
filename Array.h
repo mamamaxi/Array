@@ -5,31 +5,31 @@ template <typename T, size_t dim> class Array {
         T* Arr;
         size_t grandeur;
     public:
-        Array::Array(){ // non initialisé
+        Array(){ // non initialisé
             Arr = new T[dim];
             grandeur = dim;
         };
 
-        Array::~Array(){
+        ~Array(){
 
         }
 
-        Array::Array(T tab[]){ // avec initialisation
+        Array(T tab[]){ // avec initialisation
             Arr = tab;
         };
 
-        Array::Array(T* tab[]){ // avec initialisation
+        Array(T* tab[]){ // avec initialisation
             Arr = tab;
         };
 
-        Array::Array(const Array& a){
+        Array(const Array& a){
             Arr = new T[a.grandeur];
             grandeur = a.grandeur;
             for (size_t i = 0; i < grandeur; i++)
                 Arr[i] = a[i];
         };
 
-        Array::Array(Array&& a){
+        Array(Array&& a){
             Arr = a.Arr;
             a.Arr = nullptr;
             grandeur = a.grandeur;
@@ -56,7 +56,7 @@ template <typename T, size_t dim> class Array {
         //prend la valeur à (x) avec verification
         T* Array::at(int x){
             if (x >= size)
-                throw "size exceded";
+                throw "size exceeded";
             return *Arr[x];
         };
 

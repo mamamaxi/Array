@@ -1,0 +1,44 @@
+class Array : ArrayAbs
+ Array() void -> array
+
+ Array() int -> array[int]
+
+ size(tab) ret : int
+
+ empty() tab -> bool
+
+ operator[] int -> pointer
+ ex : tab1[12] -> ptner vers 12e cellule
+
+ .at() int -> pointer
+
+ at verify donc impossible de crash
+ operator ne verify pas -> peut crash mais plus rapide (mieux pour boucle qui pass a travers tableau)
+
+ front() tab -> var
+
+ back() tab -> var
+
+ fill() val,tab -> void
+
+ swap() tab, tab -> void
+
+ fusion() tab, tab -> tab
+
+ subset() tab, subtab, debut, nbr -> subtab
+
+ begin() void -> iterateur(0)
+
+ end() tab -> iterateur
+
+ cbegin() void -> const iterateur
+
+ cend() tab -> const iterateur
+
+
+
+type		operator++(int);	x++
+const type	operator++();		++x
+
+
+implementer *,++,--,==,!=
