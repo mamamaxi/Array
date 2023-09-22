@@ -1,9 +1,12 @@
 #include <stdexcept>
+#include <iostream>
 
-template <typename T, size_t dim> class Array {
+template <typename T, size_t dim> 
+class Array {
     private:
         T* Arr;
         size_t grandeur;
+
     public:
         Array(){ // non initialisé
             Arr = new T[dim];
@@ -11,11 +14,14 @@ template <typename T, size_t dim> class Array {
         };
 
         ~Array(){
-
+            delete[] Arr;
         }
 
         Array(T tab[]){ // avec initialisation
-            Arr = tab;
+            Arr = new T[dim];
+            grandeur = dim;
+            for (size_t i = 0; i < grandeur; i++)
+                Arr[i] = tab[i];
         };
 
         Array(T* tab[]){ // avec initialisation
@@ -35,44 +41,37 @@ template <typename T, size_t dim> class Array {
             grandeur = a.grandeur;
         };
 
-        size_t size(Array tab){
-            return tab.grandeur;
+        size_t size() const {
+            return grandeur;
         };  //renvoie le size du tableau envoyé
 
-        bool empty(Array tab){
-            if (grandeur == 0)
-            {
-                return true;
-            }
-            return false;
+        bool empty() const {
+            return grandeur == 0;
         }; //vérifie si le tableau est vide
 
         //operator[], prend la valeur à [x]
-        template <typename T>
-        T* Array<T>::operator[](int x){
-            return *Arr[x];
+        T& operator[](size_t x){
+            return Arr[x];
         };
 
         //prend la valeur à (x) avec verification
-        T* Array::at(int x){
-            if (x >= size)
-                throw "size exceeded";
-            return *Arr[x];
+        T* at(int x){
+            if (x >= grandeur)
+                throw std::out_of_range("Index out of range");
+            return Arr[x];
         };
 
-        T* Array::front(Array tab){
-            return tab[0];
-        };//valeur du premier element
+        T* front(){
+            return Arr[0];
+        }; //valeur du premier element
 
-        T* Array::back(Array tab){
-            return tab[grandeur - 1];
-        };//valeur du dernier element 
+        T* back(){
+            return Arr[grandeur - 1];
+        }; //valeur du dernier element 
 
-        void Array::fill(T value, Array tab){
-            for (size_t i = 0; i < size; i++)
-            {
-                tab[i] = value
-            }
+        void fill(T value){
+            for (int i = 0; i < size; i++)
+                Arr[i] = value;
         };//met la valeur choisi dans chaque cellules du tableau
 
         void swap(Array tab1, Array tab2){
@@ -84,19 +83,36 @@ template <typename T, size_t dim> class Array {
             }
         };//échange les valeurs des deux tableaux
 
-        Array fusion(Array tab1, Array tab2){
-            if (tab1 != tab2)
-                throw "not compatible types"
+        Array fusion(const Array tab1,const Array tab2){
+            if (tab1.size() != tab2.size())
+                throw std::runtime_error("Arrays have different sizes");
             
-            Array tab = new Array<typename T, size_t tab1.grandeur + tab2.grandeur>;
+            Array<T, dim> tab;
+
+            for (int i = 0; i < tab1.size(); ++i) {
+                tab[i] = tab1[i] + tab2[i]; 
+            }
+            return tab;
 
         };//fusionne 2 tableaux
 
-        Array subset(Array entry, int start, int length){
+        Array subset(const Array& tableau, int depart, int duree) {
+            Array<T, dim> tab;
 
-        };//retourne un nouveau tableau avec les valeurs entre start et start + length
-
-        Iterator begin(){
+            // Vérifier que l'indice de départ est valide
+            if (depart < 0 || depart >= tableau.size()) {
+                 throw std::runtime_error("start value isnt valid");
+            }
+            int counter = 0;
+            // Copier les éléments du tableau d'origine dans le nouveau tableau
+            for (int i = depart; i < depart + duree && i < tableau.size(); i++) {
+                tab[counter] = tableau[i];
+                counter++;
+            }
+            return tab;
+        }
+        
+        /*Iterator begin(){
             return Iterator();
         };//retourne un iterateur au début du tableau
 
@@ -114,11 +130,11 @@ template <typename T, size_t dim> class Array {
 
         class Iterator{
         public:
-            Iterator::Iterator(/* args */){
+            Iterator::Iterator(){
 
             };
             Iterator::~Iterator(){
 
             };
-        };        
+        }; */       
 };
