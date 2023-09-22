@@ -55,22 +55,22 @@ class Array {
         };
 
         //prend la valeur à (x) avec verification
-        T* at(int x){
+        T& at(int x){
             if (x >= grandeur)
                 throw std::out_of_range("Index out of range");
             return Arr[x];
         };
 
-        T* front(){
+        T& front(){
             return Arr[0];
         }; //valeur du premier element
 
-        T* back(){
+        T& back(){
             return Arr[grandeur - 1];
         }; //valeur du dernier element 
 
         void fill(T value){
-            for (int i = 0; i < size; i++)
+            for (int i = 0; i < grandeur; i++)
                 Arr[i] = value;
         };//met la valeur choisi dans chaque cellules du tableau
 
@@ -96,45 +96,66 @@ class Array {
 
         };//fusionne 2 tableaux
 
-        Array subset(const Array& tableau, int depart, int duree) {
-            Array<T, dim> tab;
-
+        Array subset(int depart, int duree) {
             // Vérifier que l'indice de départ est valide
-            if (depart < 0 || depart >= tableau.size()) {
+            if (depart < 0 || depart >= static_cast<int>(grandeur)) {
                  throw std::runtime_error("start value isnt valid");
             }
+
+            Array<T, dim> tab;
             int counter = 0;
+
             // Copier les éléments du tableau d'origine dans le nouveau tableau
-            for (int i = depart; i < depart + duree && i < tableau.size(); i++) {
-                tab[counter] = tableau[i];
+            for (int i = depart; i < depart + duree && i < tab.size(); i++) {
+                tab[counter] = Arr[i];
                 counter++;
             }
             return tab;
         }
+
+        class Iterator{
+            private:
+            T* ptr;
+            public:
+                Iterator() : ptr(nullptr){}
+                Iterator(T* p) : ptr(p){}
+                //~Iterator(){};
+
+                T& operator*(){
+                    return *ptr;
+                }
+
+                Iterator& operator++() {
+                    ++ptr;
+                    return *this;
+                }
+
+                Iterator& operator--(){
+                    --ptr;
+                    return *this;
+                }
+
+                bool operator==(const Iterator& iterator2) const {
+                    return ptr == iterator2.ptr;
+                }
+                bool operator!=(const Iterator& iterator2) const {
+                    return ptr != iterator2.ptr;
+                }
+        };  
         
-        /*Iterator begin(){
-            return Iterator();
+        Iterator begin(){
+            return Iterator(Arr);
         };//retourne un iterateur au début du tableau
 
-        const Iterator cbegin(){
-            return Iterator();
+        const Iterator cbegin() const {
+            return Iterator(Arr);
         };//retourne un iterateur constant au début du tableau
 
         Iterator end(Array tab){
-            return Iterator();
+            return Iterator(Arr + grandeur);
         };//retourne un iterateur a la fin du tableau
 
-        const Iterator cend(Array tab){
-            return Iterator();
-        };//retourne un iterateur constant a la fin du tableau
-
-        class Iterator{
-        public:
-            Iterator::Iterator(){
-
-            };
-            Iterator::~Iterator(){
-
-            };
-        }; */       
+        const Iterator cend(Array tab) const {
+            return Iterator(Arr + grandeur);
+        };//retourne un iterateur constant a la fin du tableau 
 };

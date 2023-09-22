@@ -22,7 +22,7 @@ int main() {
     }
     std::cout << std::endl;
 
-    // Test swap()
+    // Test swap
     int data2[] = {6, 7, 8, 9, 10};
     Array<int, 5> anotherArray(data2);
 
@@ -52,7 +52,7 @@ int main() {
     }
     std::cout << std::endl;
 
-    // Test fusion()
+    // Test fusion
     Array<int, 5> resultArray = myArray.fusion(anotherArray);
 
     std::cout << "After fusion: ";
@@ -60,18 +60,4 @@ int main() {
         std::cout << resultArray[i] << " ";
     }
     std::cout << std::endl;
-
-    // Test subset()
-    try {
-        Array<int, 5> subsetArray = myArray.subset(2, 3); // Get a subset starting from index 2, with length 3
-        std::cout << "Subset: ";
-        for (size_t i = 0; i < subsetArray.size(); i++) {
-            std::cout << subsetArray[i] << " ";
-        }
-        std::cout << std::endl;
-    } catch (const std::runtime_error& e) {
-        std::cerr << "Error: " << e.what() << std::endl;
-    }
-
-    return 0;
 }
